@@ -1,5 +1,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 
+#include "config.h"
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -87,8 +89,9 @@ int main()
     // -----------
     Model ourModel(backpack_text_path);
 
-    // draw in wireframe
-    // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+#ifdef WIREFRAME
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+#endif
 
     // render loop
     // -----------
@@ -106,7 +109,7 @@ int main()
 
         // render
         // ------
-        glClearColor(0.713f, 0.839f, 0.984f, 1.0f);
+        glClearColor(SKY_COLOR.x, SKY_COLOR.y, SKY_COLOR.z, SKY_COLOR.w);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // don't forget to enable shader before setting uniforms
