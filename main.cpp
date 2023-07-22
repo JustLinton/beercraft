@@ -88,7 +88,7 @@ int main()
     Model ourModel(backpack_text_path);
 
     // draw in wireframe
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     // render loop
     // -----------
