@@ -34,4 +34,8 @@ string backpack_text_path = "./objects/blocks/grass_block/block.obj";
 // string backpack_text_path = "./objects/door/Wooden-Door.obj";
 // ==================================================================================
 
+// ----------------------- tell stb_image.h to flip loaded texture's on the y-axis.--
+const bool TEXTURE_Y_FLIP = false;
+// ==================================================================================
+
 #endif
