@@ -1,6 +1,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 
-#include "options.h"
+#include "properties.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
