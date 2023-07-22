@@ -1,7 +1,7 @@
 run:
 	echo "Running..."
-	rm ./main
-	g++ main.cpp ./libs/glad.c -o main -I ./include -L ./libs/darwin-arm64 -lglfw3 -lassimp -framework Cocoa -framework OpenGL -framework IOKit
+	# rm ./main
+	g++ -std=c++11 main.cpp ./libs/glad.c -o main -I ./include -L ./libs/darwin-arm64 -lglfw3 -lassimp -framework Cocoa -framework OpenGL -framework IOKit
 	./main
 
 save:

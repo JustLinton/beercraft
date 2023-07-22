@@ -913,7 +913,8 @@ struct aiMesh {
         if (mTextureCoordsNames == nullptr) {
             // Construct and null-init array
             // before linton change: mTextureCoordsNames = new aiString *[AI_MAX_NUMBER_OF_TEXTURECOORDS] {};
-            mTextureCoordsNames = new aiString *[AI_MAX_NUMBER_OF_TEXTURECOORDS];
+            // mTextureCoordsNames = new aiString *[AI_MAX_NUMBER_OF_TEXTURECOORDS];
+            mTextureCoordsNames = new aiString *[AI_MAX_NUMBER_OF_TEXTURECOORDS] {};
         }
 
         if (texCoordsName.length == 0) {
