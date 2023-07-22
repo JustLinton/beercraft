@@ -2,6 +2,7 @@
 
 #include "properties.h"
 #include <core/font.h>
+#include <core/context.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -79,11 +80,12 @@ int main()
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
 
-    Shader text_shader = initFontRender();
-
     // build and compile shaders
     // -------------------------
-    Shader ourShader("./shaders/1.model_loading.vs", "./shaders/1.model_loading.fs");
+    Shader text_shader = initFontRender();
+    baseContext.shaders["text"] = &text_shader;
+    Shader default_model_Shader("./shaders/1.model_loading.vs", "./shaders/1.model_loading.fs");
+    baseContext.shaders["default_model"] = &default_model_Shader;
 
     // load models
     // -----------
@@ -112,23 +114,23 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // don't forget to enable shader before setting uniforms
-        ourShader.use();
+        baseContext.shaders["default_model"]->use();
 
         // view/projection transformations
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
-        ourShader.setMat4("projection", projection);
-        ourShader.setMat4("view", view);
+        baseContext.shaders["default_model"]->setMat4("projection", projection);
+        baseContext.shaders["default_model"]->setMat4("view", view);
 
         // render the loaded model
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
         model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));     // it's a bit too big for our scene, so scale it down
-        ourShader.setMat4("model", model);
-        ourModel.Draw(ourShader);
+        baseContext.shaders["default_model"]->setMat4("model", model);
+        ourModel.Draw(*baseContext.shaders["default_model"]);
 
-        text_shader.use();
-        RenderText(text_shader, version_string, 15.0f, (float)SCR_HEIGHT - 30.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
+        baseContext.shaders["text"]->use();
+        RenderText(*baseContext.shaders["text"], version_string, 15.0f, (float)SCR_HEIGHT - 30.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------

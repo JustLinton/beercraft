@@ -1,5 +1,5 @@
-#ifndef INIT_H
-#define INIT_H
+#ifndef CTX_H
+#define CTX_H
 
 #include <iostream>
 #include <map>
@@ -12,12 +12,16 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <freetype2/ft2build.h>
-#include FT_FREETYPE_H
-
 #include <graphics/shader.h>
 
 #include <bits/stdc++.h>
 using namespace std;
+
+struct BaseContext
+{
+    unordered_map<string, Shader *> shaders;
+};
+
+BaseContext baseContext;
 
 #endif
