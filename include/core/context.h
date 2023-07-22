@@ -22,6 +22,4 @@ struct BaseContext
     unordered_map<string, Shader *> shaders;
 };
 
-BaseContext baseContext;
-
 #endif

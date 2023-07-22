@@ -22,13 +22,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void initShaders(){
+void initShaders(BaseContext* baseContext)
+{
     // build and compile shaders
     // -------------------------
-    Shader text_shader = initFontRender();
-    baseContext.shaders["text"] = &text_shader;
-    Shader default_model_Shader("./shaders/1.model_loading.vs", "./shaders/1.model_loading.fs");
-    baseContext.shaders["default_model"] = &default_model_Shader;
+    static Shader text_shader = initFontRender();
+    baseContext->shaders["text"] = &text_shader;
+    static Shader default_model_Shader("./shaders/1.model_loading.vs", "./shaders/1.model_loading.fs");
+    baseContext->shaders["default_model"] = &default_model_Shader;
 }
 
 #endif
