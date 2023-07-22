@@ -2,8 +2,9 @@
 
 #include "properties.h"
 #include <core/font.h>
-#include <core/context.h>
+#include <core/root_context.h>
 #include <core/shaders.h>
+#include <core/models.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -37,7 +38,12 @@ bool firstMouse = true;
 float deltaTime = 0.0f;
 float lastFrame = 0.0f;
 
-BaseContext baseContext;
+RootContext rootContext;
+
+void initRootContext(RootContext* rootContext){
+    initShaders(rootContext);
+    initModels(rootContext);
+}
 
 int main()
 {
@@ -83,11 +89,7 @@ int main()
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
 
-    initShaders(&baseContext);
-
-    // load models
-    // -----------
-    Model ourModel(backpack_text_path);
+    initRootContext(&rootContext);
 
     if (WIREFRAME)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -112,23 +114,23 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // don't forget to enable shader before setting uniforms
-        baseContext.shaders["default_model"]->use();
+        rootContext.shaders["default_model"]->use();
 
         // view/projection transformations
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
         glm::mat4 view = camera.GetViewMatrix();
-        baseContext.shaders["default_model"]->setMat4("projection", projection);
-        baseContext.shaders["default_model"]->setMat4("view", view);
+        rootContext.shaders["default_model"]->setMat4("projection", projection);
+        rootContext.shaders["default_model"]->setMat4("view", view);
 
         // render the loaded model
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
         model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));     // it's a bit too big for our scene, so scale it down
-        baseContext.shaders["default_model"]->setMat4("model", model);
-        ourModel.Draw(*baseContext.shaders["default_model"]);
+        rootContext.shaders["default_model"]->setMat4("model", model);
+        rootContext.blockModels[2]->Draw(*rootContext.shaders["default_model"]);
 
-        baseContext.shaders["text"]->use();
-        RenderText(*baseContext.shaders["text"], version_string, 15.0f, (float)SCR_HEIGHT - 30.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
+        rootContext.shaders["text"]->use();
+        RenderText(*rootContext.shaders["text"], version_string, 15.0f, (float)SCR_HEIGHT - 30.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------

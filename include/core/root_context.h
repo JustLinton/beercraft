@@ -13,13 +13,15 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <graphics/shader.h>
+#include <graphics/model.h>
 
 #include <bits/stdc++.h>
 using namespace std;
 
-struct BaseContext
+struct RootContext
 {
     unordered_map<string, Shader *> shaders;
+    unordered_map<unsigned int, Model *> blockModels;
 };
 
 #endif

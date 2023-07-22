@@ -37,7 +37,7 @@ const string font_path = "./fonts/Minecraft.ttf";
 // ==================================================================================
 
 // ----------------------- initial block model path ---------------------------------
-const string backpack_text_path = "./objects/blocks/grass_block/block.obj";
+const string default_model_path = "./objects/blocks/grass_block/block.obj";
 // string backpack_text_path = "./objects/blocks/chest/chest.obj";
 // string backpack_text_path = "./objects/door/Wooden-Door.obj";
 // ==================================================================================
