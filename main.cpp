@@ -226,7 +226,8 @@ int main()
         ourModel.Draw(ourShader);
 
         text_shader.use();
-        RenderText(text_shader, "Beercraft 1.0", 15.0f, (float)SCR_HEIGHT - 30.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
+        RenderText(text_shader, version_string, 15.0f, (float)SCR_HEIGHT - 30.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
+        RenderText(text_shader, version_string, 17.0f, (float)SCR_HEIGHT - 32.0f, 0.38f, glm::vec3(0.0f, 0.0f, 0.0f));
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
