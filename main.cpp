@@ -9,11 +9,13 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <ft2build.h>
+#include <freetype2/ft2build.h>
 #include FT_FREETYPE_H
 
-#include <graphics/filesystem.h>
 #include <graphics/shader.h>
+
+#include <bits/stdc++.h>
+using namespace std;
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
@@ -22,6 +24,8 @@ void RenderText(Shader &shader, std::string text, float x, float y, float scale,
 // settings
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
+
+string font_path = "./fonts/Minecraft.ttf";
 
 /// Holds all state information relevant to a character as loaded using FreeType
 struct Character {
@@ -75,7 +79,7 @@ int main()
     
     // compile and setup the shader
     // ----------------------------
-    Shader shader("text.vs", "text.fs");
+    Shader shader("./shaders/text.vs", "./shaders/text.fs");
     glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(SCR_WIDTH), 0.0f, static_cast<float>(SCR_HEIGHT));
     shader.use();
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
@@ -91,7 +95,7 @@ int main()
     }
 
 	// find path to font
-    std::string font_name = FileSystem::getPath("resources/fonts/Antonio-Bold.ttf");
+    std::string font_name = font_path;
     if (font_name.empty())
     {
         std::cout << "ERROR::FREETYPE: Failed to load font_name" << std::endl;
