@@ -21,7 +21,7 @@ const unsigned int SCR_HEIGHT = 720;
 // ============================================
 
 // ======================= draw in wireframe===
-const unsigned bool WIREFRAME = false;
+const bool WIREFRAME = false;
 // ============================================
 
 // ======================= Color of default sky
