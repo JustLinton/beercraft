@@ -28,4 +28,10 @@ const bool WIREFRAME = false;
 glm::vec4 SKY_COLOR = glm::vec4(0.713f, 0.839f, 0.984f, 1.0f);
 // ==================================================================================
 
+// ----------------------- initial block model path ---------------------------------
+string backpack_text_path = "./objects/blocks/grass_block/block.obj";
+// string backpack_text_path = "./objects/blocks/chest/chest.obj";
+// string backpack_text_path = "./objects/door/Wooden-Door.obj";
+// ==================================================================================
+
 #endif

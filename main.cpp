@@ -16,10 +16,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-string backpack_text_path = "./objects/blocks/grass_block/block.obj";
-// string backpack_text_path = "./objects/blocks/chest/chest.obj";
-// string backpack_text_path = "./objects/door/Wooden-Door.obj";
-
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void mouse_callback(GLFWwindow *window, double xpos, double ypos);
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
