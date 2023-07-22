@@ -3,6 +3,7 @@
 #include "properties.h"
 #include <core/font.h>
 #include <core/context.h>
+#include <core/shaders.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -80,12 +81,7 @@ int main()
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
 
-    // build and compile shaders
-    // -------------------------
-    Shader text_shader = initFontRender();
-    baseContext.shaders["text"] = &text_shader;
-    Shader default_model_Shader("./shaders/1.model_loading.vs", "./shaders/1.model_loading.fs");
-    baseContext.shaders["default_model"] = &default_model_Shader;
+    initShaders();
 
     // load models
     // -----------
