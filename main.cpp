@@ -25,10 +25,6 @@ void mouse_callback(GLFWwindow *window, double xpos, double ypos);
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 void processInput(GLFWwindow *window);
 
-// settings
-const unsigned int SCR_WIDTH = 1280;
-const unsigned int SCR_HEIGHT = 720;
-
 // camera
 Camera camera(glm::vec3(0.0f, 1.0f, 0.0f));
 float lastX = SCR_WIDTH / 2.0f;
@@ -89,9 +85,8 @@ int main()
     // -----------
     Model ourModel(backpack_text_path);
 
-#ifdef WIREFRAME
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-#endif
+    if (WIREFRAME)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     // render loop
     // -----------
