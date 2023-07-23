@@ -25,4 +25,26 @@ void renderTexts(RootContext *rootContext){
     RenderText(*rootContext->shaders["text"], version_string, 15.0f, (float)SCR_HEIGHT - 30.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
 }
 
+void renderTextFPS(RootContext *rootContext, float deltaTime, float accTime){
+    static float lastTime = 0.0f;
+    static string lastFpsStr = "0.0";
+    static float lastFpsOneSec = 0.0f;
+    static int lastFpsDataCountOneSec = 0;
+    float fps = 1.0f / deltaTime;
+    lastFpsOneSec += fps;
+    lastFpsDataCountOneSec += 1;
+    if(accTime - lastTime >= 1.0f){
+        lastTime = accTime;
+        stringstream sst;
+        sst << lastFpsOneSec / lastFpsDataCountOneSec;
+        sst >> lastFpsStr;
+        lastFpsOneSec = 0.0f;
+        lastFpsDataCountOneSec = 0;
+        lastFpsStr = "FPS> "+ lastFpsStr;
+    }
+
+    rootContext->shaders["text"]->use();
+    RenderText(*rootContext->shaders["text"], lastFpsStr, 15.0f, (float)SCR_HEIGHT - 55.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
+}
+
 #endif

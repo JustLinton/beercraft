@@ -118,6 +118,7 @@ int main()
         cameraLookAt(rootContext);
         renderBlocks(rootContext);
         renderTexts(rootContext);
+        renderTextFPS(rootContext, deltaTime, currentFrame);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
