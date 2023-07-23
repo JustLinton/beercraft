@@ -19,7 +19,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-string float2Str(const float* input){
+template <class T>
+string float2Str(const T* input){
     string tmp;
     stringstream sst;
     sst << *input;

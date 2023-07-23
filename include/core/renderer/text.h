@@ -51,11 +51,11 @@ void renderTextFPS(const float* deltaTime, const float* accTime){
 void renderCamPosition(){
     string res, tmp;
     res += "Position> ";
-    res += float2Str(&(rootContext->camera->Position.x));
+    res += float2Str<float>(&(rootContext->camera->Position.x));
     res += ", ";
-    res += float2Str(&(rootContext->camera->Position.y));
+    res += float2Str<float>(&(rootContext->camera->Position.y));
     res += ", ";
-    res += float2Str(&(rootContext->camera->Position.z));
+    res += float2Str<float>(&(rootContext->camera->Position.z));
     rootContext->shaders["text"]->use();
     RenderText(*rootContext->shaders["text"], res, 15.0f, (float)SCR_HEIGHT - 80.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
 }
