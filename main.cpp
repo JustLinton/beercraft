@@ -100,6 +100,7 @@ int main()
         renderBlocks();
         renderTexts();
         renderTextFPS(&deltaTime, &currentFrame);
+        renderCamPosition();
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
