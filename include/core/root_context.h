@@ -26,4 +26,6 @@ struct RootContext
     Camera* camera;
 };
 
+static RootContext *rootContext;
+
 #endif

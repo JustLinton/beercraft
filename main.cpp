@@ -28,18 +28,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// frame timing
-float deltaTime = 0.0f;
-float lastFrame = 0.0f;
-
-RootContext* rootContext;
-
-void initRootContext(){
-    rootContext = new RootContext;
-    initShaders(rootContext);
-    initModels(rootContext);
-    initCamera(rootContext);
-}
+void initRootContext();
 
 int main()
 {
@@ -122,4 +111,12 @@ int main()
     // ------------------------------------------------------------------
     glfwTerminate();
     return 0;
+}
+
+void initRootContext()
+{
+    rootContext = new RootContext;
+    initShaders(rootContext);
+    initModels(rootContext);
+    initCamera(rootContext);
 }
