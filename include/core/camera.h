@@ -25,7 +25,7 @@ void initCamera(RootContext* rootContext){
     rootContext->camera = &camera;
 }
 
-void camLookAt(RootContext* rootContext){
+void cameraLookAt(RootContext* rootContext){
     // don't forget to enable shader before setting uniforms
     rootContext->shaders["default_model"]->use();
 

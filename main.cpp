@@ -114,7 +114,7 @@ int main()
         // render
         // ------
         renderSkyColor();
-        camLookAt(&rootContext);
+        cameraLookAt(&rootContext);
         renderBlocks(&rootContext);
         renderTexts(&rootContext);
 
