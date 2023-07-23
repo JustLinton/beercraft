@@ -20,7 +20,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void initModels(RootContext* rootContext)
+void initModels()
 {
     // load models
     // -----------

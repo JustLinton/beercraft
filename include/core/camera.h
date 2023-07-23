@@ -20,12 +20,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void initCamera(RootContext* rootContext){
+void initCamera(){
     static Camera camera(glm::vec3(0.0f, 1.0f, 0.0f));
     rootContext->camera = &camera;
 }
 
-void cameraLookAt(RootContext* rootContext){
+void cameraLookAt(){
     // don't forget to enable shader before setting uniforms
     rootContext->shaders["default_model"]->use();
 
@@ -36,11 +36,11 @@ void cameraLookAt(RootContext* rootContext){
     rootContext->shaders["default_model"]->setMat4("view", view);
 }
 
-void moveBackToSpawnPoint(RootContext* rootContext){
+void moveBackToSpawnPoint(){
     rootContext->camera->Position = glm::vec3(0.0f, 1.0f, 0.0f);
 }
 
-void renderBlocks(RootContext* rootContext){
+void renderBlocks(){
     
     rootContext->shaders["default_model"]->use();
 

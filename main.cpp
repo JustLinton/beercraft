@@ -96,10 +96,10 @@ int main()
         // render
         // ------
         renderSkyColor();
-        cameraLookAt(rootContext);
-        renderBlocks(rootContext);
-        renderTexts(rootContext);
-        renderTextFPS(rootContext, &deltaTime, &currentFrame);
+        cameraLookAt();
+        renderBlocks();
+        renderTexts();
+        renderTextFPS(&deltaTime, &currentFrame);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
@@ -116,7 +116,7 @@ int main()
 void initRootContext()
 {
     rootContext = new RootContext;
-    initShaders(rootContext);
-    initModels(rootContext);
-    initCamera(rootContext);
+    initShaders();
+    initModels();
+    initCamera();
 }

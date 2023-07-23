@@ -20,12 +20,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void renderTexts(RootContext *rootContext){
+void renderTexts(){
     rootContext->shaders["text"]->use();
     RenderText(*rootContext->shaders["text"], version_string, 15.0f, (float)SCR_HEIGHT - 30.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
 }
 
-void renderTextFPS(RootContext *rootContext, const float* deltaTime, const float* accTime){
+void renderTextFPS(const float* deltaTime, const float* accTime){
     static float lastTime = 0.0f;
     static string lastFpsStr = "0.0";
     static float lastFpsOneSec = 0.0f;

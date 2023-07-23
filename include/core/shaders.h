@@ -19,7 +19,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void initShaders(RootContext* rootContext)
+void initShaders()
 {
     // build and compile shaders
     // -------------------------

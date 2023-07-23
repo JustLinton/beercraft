@@ -6,6 +6,7 @@
 #include <string>
 
 #include <core/root_context.h>
+#include <core/camera.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -33,6 +34,9 @@ void processInput(GLFWwindow *window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
+
+    if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
+        moveBackToSpawnPoint();
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         rootContext->camera->ProcessKeyboard(FORWARD, deltaTime);
