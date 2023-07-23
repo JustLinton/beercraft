@@ -48,16 +48,22 @@ void renderTextFPS(const float* deltaTime, const float* accTime){
     RenderText(*rootContext->shaders["text"], lastFpsStr, 15.0f, (float)SCR_HEIGHT - 55.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
 }
 
-void renderCamPosition(){
+void renderTextCamPosition(){
     string res, tmp;
+    stringstream sst;
     res += "Position> ";
-    res += float2Str<float>(&(rootContext->camera->Position.x));
+    res += float2Str<float>(&(rootContext->camera->Position.x),&sst);
     res += ", ";
-    res += float2Str<float>(&(rootContext->camera->Position.y));
+    res += float2Str<float>(&(rootContext->camera->Position.y),&sst);
     res += ", ";
-    res += float2Str<float>(&(rootContext->camera->Position.z));
+    res += float2Str<float>(&(rootContext->camera->Position.z),&sst);
     rootContext->shaders["text"]->use();
     RenderText(*rootContext->shaders["text"], res, 15.0f, (float)SCR_HEIGHT - 80.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
 }
+
+// void renderTextTest(){
+//     rootContext->shaders["text"]->use();
+//     RenderText(*rootContext->shaders["text"], "res", 0.0f, (float)SCR_HEIGHT - 5.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
+// }
 
 #endif

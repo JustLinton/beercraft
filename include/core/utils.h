@@ -20,11 +20,12 @@
 using namespace std;
 
 template <class T>
-string float2Str(const T* input){
+string float2Str(const T *input, stringstream* sst)
+{
     string tmp;
-    stringstream sst;
-    sst << *input;
-    sst >> tmp;
+    sst->clear();
+    (*sst) << *input;
+    (*sst) >> tmp;
     return tmp;
 }
 
