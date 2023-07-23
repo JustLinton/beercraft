@@ -36,6 +36,10 @@ void cameraLookAt(RootContext* rootContext){
     rootContext->shaders["default_model"]->setMat4("view", view);
 }
 
+void moveBackToSpawnPoint(RootContext* rootContext){
+    rootContext->camera->Position = glm::vec3(0.0f, 1.0f, 0.0f);
+}
+
 void renderBlocks(RootContext* rootContext){
     
     rootContext->shaders["default_model"]->use();
