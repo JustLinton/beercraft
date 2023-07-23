@@ -5,7 +5,10 @@
 #include <core/root_context.h>
 #include <core/shaders.h>
 #include <core/models.h>
-#include <core/cam.h>
+#include <core/camera.h>
+
+#include <core/renderer/text.h>
+#include <core/renderer/env.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -29,8 +32,6 @@ void mouse_callback(GLFWwindow *window, double xpos, double ypos);
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset);
 void processInput(GLFWwindow *window);
 
-// camera
-Camera camera(glm::vec3(0.0f, 1.0f, 0.0f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
@@ -44,6 +45,7 @@ RootContext rootContext;
 void initRootContext(RootContext* rootContext){
     initShaders(rootContext);
     initModels(rootContext);
+    initCamera(rootContext);
 }
 
 int main()
@@ -111,10 +113,8 @@ int main()
 
         // render
         // ------
-        glClearColor(SKY_COLOR.x, SKY_COLOR.y, SKY_COLOR.z, SKY_COLOR.w);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        cam(&rootContext, &camera);
+        renderSkyColor();
+        camLookAt(&rootContext);
         renderBlocks(&rootContext);
         renderTexts(&rootContext);
 
@@ -138,13 +138,13 @@ void processInput(GLFWwindow *window)
         glfwSetWindowShouldClose(window, true);
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        camera.ProcessKeyboard(FORWARD, deltaTime);
+        rootContext.camera->ProcessKeyboard(FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        camera.ProcessKeyboard(BACKWARD, deltaTime);
+        rootContext.camera->ProcessKeyboard(BACKWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        camera.ProcessKeyboard(LEFT, deltaTime);
+        rootContext.camera->ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        camera.ProcessKeyboard(RIGHT, deltaTime);
+        rootContext.camera->ProcessKeyboard(RIGHT, deltaTime);
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
@@ -176,12 +176,12 @@ void mouse_callback(GLFWwindow *window, double xposIn, double yposIn)
     lastX = xpos;
     lastY = ypos;
 
-    camera.ProcessMouseMovement(xoffset, yoffset);
+    rootContext.camera->ProcessMouseMovement(xoffset, yoffset);
 }
 
 // glfw: whenever the mouse scroll wheel scrolls, this callback is called
 // ----------------------------------------------------------------------
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 {
-    camera.ProcessMouseScroll(static_cast<float>(yoffset));
+    rootContext.camera->ProcessMouseScroll(static_cast<float>(yoffset));
 }

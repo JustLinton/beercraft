@@ -1,9 +1,12 @@
-#ifndef CTX_H
-#define CTX_H
+#ifndef ENV_RENDER_H
+#define ENV_RENDER_H
 
 #include <iostream>
 #include <map>
 #include <string>
+
+#include <core/root_context.h>
+#include <core/font.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -13,17 +16,14 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <graphics/shader.h>
-#include <graphics/model.h>
-#include <graphics/camera.h>
 
 #include <bits/stdc++.h>
 using namespace std;
 
-struct RootContext
+void renderSkyColor()
 {
-    unordered_map<string, Shader *> shaders;
-    unordered_map<unsigned int, Model *> blockModels;
-    Camera* camera;
-};
+    glClearColor(SKY_COLOR.x, SKY_COLOR.y, SKY_COLOR.z, SKY_COLOR.w);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
 
 #endif
