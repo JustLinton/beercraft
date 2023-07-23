@@ -5,6 +5,7 @@
 #include <core/root_context.h>
 #include <core/shaders.h>
 #include <core/models.h>
+#include <core/cam.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -113,24 +114,9 @@ int main()
         glClearColor(SKY_COLOR.x, SKY_COLOR.y, SKY_COLOR.z, SKY_COLOR.w);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // don't forget to enable shader before setting uniforms
-        rootContext.shaders["default_model"]->use();
-
-        // view/projection transformations
-        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        glm::mat4 view = camera.GetViewMatrix();
-        rootContext.shaders["default_model"]->setMat4("projection", projection);
-        rootContext.shaders["default_model"]->setMat4("view", view);
-
-        // render the loaded model
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(0.2f, 0.2f, 0.2f));     // it's a bit too big for our scene, so scale it down
-        rootContext.shaders["default_model"]->setMat4("model", model);
-        rootContext.blockModels[2]->Draw(*rootContext.shaders["default_model"]);
-
-        rootContext.shaders["text"]->use();
-        RenderText(*rootContext.shaders["text"], version_string, 15.0f, (float)SCR_HEIGHT - 30.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
+        cam(&rootContext, &camera);
+        renderBlocks(&rootContext);
+        renderTexts(&rootContext);
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
