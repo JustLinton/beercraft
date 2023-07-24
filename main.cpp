@@ -8,11 +8,7 @@
 #include <beercraft/camera.h>
 #include <beercraft/control.h>
 
-
-#include <beercraft/renderer/text.h>
 #include <beercraft/renderer/env.h>
-
-#include <beercraft/gui/crosshair.h>
 #include <beercraft/gui/gui.h>
 
 #include <glad/glad.h>
@@ -102,9 +98,8 @@ int main()
         renderSkyColor();
         cameraLookAt();
         renderBlocks();
-        renderTexts();
-        renderTextFPS(&deltaTime, &currentFrame);
-        renderTextCamPosition();
+        // renderTexts();
+        updateFPSData(&deltaTime, &currentFrame);
         rootContext->beerCraftGUI->render();
         
         // renderTextTest();
