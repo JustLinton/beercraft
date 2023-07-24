@@ -21,6 +21,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+#include <core/renderer/base2d.h>
+
 void renderTexts(){
     rootContext->shaders["text"]->use();
     RenderText(*rootContext->shaders["text"], version_string, 15.0f, (float)SCR_HEIGHT - 30.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
@@ -61,9 +63,9 @@ void renderTextCamPosition(){
     RenderText(*rootContext->shaders["text"], res, 15.0f, (float)SCR_HEIGHT - 80.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
 }
 
-// void renderTextTest(){
-//     rootContext->shaders["text"]->use();
-//     RenderText(*rootContext->shaders["text"], "res", 0.0f, (float)SCR_HEIGHT - 5.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
-// }
+void renderTextTest(){
+    rootContext->shaders["base_2d_shader"]->use();
+    renderBase2D(*rootContext->shaders["base_2d_shader"], 0.0f, (float)SCR_HEIGHT - 105.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
+}
 
 #endif

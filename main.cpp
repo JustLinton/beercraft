@@ -8,8 +8,10 @@
 #include <core/camera.h>
 #include <core/control.h>
 
+
 #include <core/renderer/text.h>
 #include <core/renderer/env.h>
+#include <core/renderer/base2d.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -101,7 +103,8 @@ int main()
         renderTexts();
         renderTextFPS(&deltaTime, &currentFrame);
         renderTextCamPosition();
-        // renderTextTest();
+        // renderCrossHair();
+        renderTextTest();
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
@@ -121,4 +124,5 @@ void initRootContext()
     initShaders();
     initModels();
     initCamera();
+    // buildCrossHair();
 }

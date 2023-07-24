@@ -6,6 +6,7 @@
 #include <string>
 
 #include <core/root_context.h>
+#include <core/renderer/base2d.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -27,6 +28,9 @@ void initShaders()
     rootContext->shaders["text"] = &text_shader;
     static Shader default_model_Shader("./shaders/1.model_loading.vs", "./shaders/1.model_loading.fs");
     rootContext->shaders["default_model"] = &default_model_Shader;
+
+    static Shader base_2d_shader = initBase2DRender();
+    rootContext->shaders["base_2d_shader"] = &base_2d_shader;
 }
 
 #endif
