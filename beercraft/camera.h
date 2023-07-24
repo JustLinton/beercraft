@@ -20,10 +20,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void initCamera(){
-    static Camera camera(glm::vec3(0.0f, 1.0f, 0.0f));
-    rootContext->camera = &camera;
-}
+// void initCamera(){
+//     static Camera camera(glm::vec3(0.0f, 1.0f, 0.0f));
+//     rootContext->camera = &camera;
+// }
 
 void cameraLookAt(){
     // don't forget to enable shader before setting uniforms

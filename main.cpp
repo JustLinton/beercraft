@@ -99,7 +99,7 @@ int main()
         cameraLookAt();
         renderBlocks();
         // renderTexts();
-        updateFPSData(&deltaTime, &currentFrame);
+        rootContext->beerCraftGUI->f3Debug->updateFPSData(&deltaTime, &currentFrame);
         rootContext->beerCraftGUI->render();
         
         // renderTextTest();
@@ -121,5 +121,5 @@ void initRootContext()
     rootContext = new RootContext;
     initShaders();
     initModels();
-    initCamera();
+    // initCamera();
 }

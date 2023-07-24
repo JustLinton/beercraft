@@ -23,8 +23,8 @@ void initShaders()
 {
     // build and compile shaders
     // -------------------------
-    static Shader text_shader = initFontRender();
-    rootContext->shaders["text"] = &text_shader;
+    // static Shader text_shader = initFontRender();
+    // rootContext->shaders["text"] = &text_shader;
     static Shader default_model_Shader("./shaders/1.model_loading.vs", "./shaders/1.model_loading.fs");
     rootContext->shaders["default_model"] = &default_model_Shader;
 

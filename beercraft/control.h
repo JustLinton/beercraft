@@ -38,6 +38,14 @@ void processInput(GLFWwindow *window)
     if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
         moveBackToSpawnPoint();
 
+
+    //f3 debug
+    if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
+        rootContext->beerCraftGUI->f3Debug->toggle();
+    if (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS)
+        rootContext->beerCraftGUI->f3Debug->modeSwitch();
+    // end of f3 debug
+
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         rootContext->camera->ProcessKeyboard(FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)

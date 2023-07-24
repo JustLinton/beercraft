@@ -26,14 +26,17 @@ class RootContext
 public:
     unordered_map<string, Shader *> shaders;
     unordered_map<unsigned int, Model *> blockModels;
-    Camera* camera;
+    
     unordered_map<string, unsigned int *> VAOs;
     unordered_map<string, unsigned int *> VBOs;
 
+    Camera *camera;
+    
     BeerCraftGUI* beerCraftGUI;
 
     RootContext(){
-        beerCraftGUI = new BeerCraftGUI;
+        camera = new Camera(glm::vec3(0.0f, 1.0f, 0.0f));
+        beerCraftGUI = new BeerCraftGUI(camera);
     }
 };
 

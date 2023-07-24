@@ -26,11 +26,14 @@ public:
     GUICrossHair* crossHair;
     F3Debug* f3Debug;
 
-    BeerCraftGUI(){
+    Camera* camera;
+
+    BeerCraftGUI(Camera *camera_) : camera(camera_)
+    {
         crossHair = new GUICrossHair(1.0f, 8.35f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
         crossHair->build();
 
-        f3Debug = new f3Debug;
+        f3Debug = new F3Debug(camera);
     }
 
     void render(){
