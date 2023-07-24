@@ -54,6 +54,8 @@ public:
         //if want to re-draw it at sometime, use the following:
         // glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 13 * 4, NULL, GL_DYNAMIC_DRAW);
         glEnableVertexAttribArray(0);
+
+        //给shader传参数：即in的那几个，这里是offset=0的那个in的参数
         glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindVertexArray(0);
@@ -102,8 +104,8 @@ public:
     {
         // activate corresponding render state
         shader.use();
-        // glUniform3f(glGetUniformLocation(shader.ID, "textColor"), color.x, color.y, color.z);
 
+        // 给shader传参数：即uniform的那几个，这里是inputColor的那个uniform
         glUniform4f(glGetUniformLocation(shader.ID, "inputColor"), color.x, color.y, color.z,color.w);
 
         glBindVertexArray(localVAO);
