@@ -16,16 +16,25 @@
 #include <graphics/model.h>
 #include <graphics/camera.h>
 
+#include <beercraft/gui/gui.h>
+
 #include <bits/stdc++.h>
 using namespace std;
 
-struct RootContext
+class RootContext
 {
+public:
     unordered_map<string, Shader *> shaders;
     unordered_map<unsigned int, Model *> blockModels;
     Camera* camera;
     unordered_map<string, unsigned int *> VAOs;
     unordered_map<string, unsigned int *> VBOs;
+
+    BeerCraftGUI* beerCraftGUI;
+
+    RootContext(){
+        beerCraftGUI = new BeerCraftGUI;
+    }
 };
 
 static RootContext *rootContext;

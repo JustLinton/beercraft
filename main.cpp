@@ -11,7 +11,9 @@
 
 #include <beercraft/renderer/text.h>
 #include <beercraft/renderer/env.h>
-#include <beercraft/renderer/base2d.h>
+
+#include <beercraft/gui/crosshair.h>
+#include <beercraft/gui/gui.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -103,8 +105,9 @@ int main()
         renderTexts();
         renderTextFPS(&deltaTime, &currentFrame);
         renderTextCamPosition();
-        // renderCrossHair();
-        renderTextTest();
+        rootContext->beerCraftGUI->render();
+        
+        // renderTextTest();
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
@@ -124,5 +127,4 @@ void initRootContext()
     initShaders();
     initModels();
     initCamera();
-    // buildCrossHair();
 }
