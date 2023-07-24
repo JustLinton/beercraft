@@ -29,7 +29,7 @@ public:
     Camera* camera;
 
     //number of f3 displaymodes.
-    const int modeCount = 3;
+    const int modeCount = 4;
 
     //this bool ensures f3key works properly. (add colddown using fpsdata update.)
     bool shouldProcessToggle = true;
@@ -44,6 +44,10 @@ public:
     // position Statistics
     string positionStrAcc = "Position> Loading...";
     // end of position Statistics
+
+    // test output
+    string testStr = "Test> Loading...";
+    //end of test output
 
     F3Debug(Camera *camera_) : shader("./shaders/base2d2.vs", "./shaders/base2d2.fs"), camera(camera_)
     {
@@ -88,6 +92,10 @@ public:
             res = positionStrAcc;
             break;
 
+        case 3:
+            res = testStr;
+            break;
+
         default:
             res = version_string;
             break;
@@ -128,15 +136,24 @@ public:
         if(!isOn)
             return;
 
-        string res, tmp;
+        string res;
         stringstream sst;
         res += "Position> ";
-        res += float2Str<float>(&(camera->Position.x), &sst);
+        res += float2Str<float>(camera->Position.x, &sst);
         res += ", ";
-        res += float2Str<float>(&(camera->Position.y), &sst);
+        res += float2Str<float>(camera->Position.y, &sst);
         res += ", ";
-        res += float2Str<float>(&(camera->Position.z), &sst);
+        res += float2Str<float>(camera->Position.z, &sst);
         positionStrAcc = res;
+    }
+
+    void updateTestOutput(){
+        string res;
+        stringstream sst;
+        res += "Test> ";
+        res += float2Str<float>((int)(camera->Position.x), &sst);
+
+        testStr = res;
     }
 };
 

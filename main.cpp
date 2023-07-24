@@ -99,6 +99,7 @@ int main()
         cameraLookAt();
         renderBlocks();
         rootContext->beerCraftGUI->f3Debug->updateFPSData(&deltaTime, &currentFrame);
+        rootContext->beerCraftGUI->f3Debug->updateTestOutput();
         rootContext->beerCraftGUI->render();
         
         // renderTextTest();

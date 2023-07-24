@@ -43,22 +43,25 @@ void moveBackToSpawnPoint(){
 void renderBlocks(){
     
     rootContext->shaders["default_model"]->use();
-    glm::vec3 blockScale(0.2f, 0.2f, 0.2f);
+    glm::vec3 blockScale(0.5f, 0.5f, 0.5f);
+    //default:
+    // glm::vec3 blockScale(0.2f, 0.2f, 0.2f);
 
     // render the loaded model
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::scale(model, blockScale);                      // it's a bit too big for our scene, so scale it down
+    glm::mat4 unitMat = glm::mat4(1.0f);
 
     for(int i=0;i<=1;i++){
-        glm::mat4 translated = model;
+        glm::mat4 model = unitMat;
         if(i==0){
-            translated = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-            rootContext->shaders["default_model"]->setMat4("model", translated);
+            model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+            model = glm::scale(model, blockScale);                      // it's a bit too big for our scene, so scale it down
+            rootContext->shaders["default_model"]->setMat4("model", model);
             rootContext->blockModels[2]->Draw(*rootContext->shaders["default_model"]);
         }
         if(i==1){
-            translated = glm::translate(model, glm::vec3(1.0f, 1.0f, 0.0f)); // translate it down so it's at the center of the scene
-            rootContext->shaders["default_model"]->setMat4("model", translated);
+            model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+            model = glm::scale(model, blockScale);                      // it's a bit too big for our scene, so scale it down
+            rootContext->shaders["default_model"]->setMat4("model", model);
             rootContext->blockModels[0]->Draw(*rootContext->shaders["default_model"]);
         }
         
