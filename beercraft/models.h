@@ -26,6 +26,9 @@ void initModels()
     // -----------
     static Model b2("objects/blocks/grass_block/block.obj");
     rootContext->blockModels[2] = &b2;
+
+    static Model bw("objects/blocks/white_block/block.obj");
+    rootContext->blockModels[0] = &bw;
 }
 
 #endif

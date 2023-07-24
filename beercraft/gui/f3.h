@@ -80,11 +80,11 @@ public:
             res = version_string;
             break;
 
-        case 1:
+        case 2:
             res = lastFpsStr;
             break;
 
-        case 2:
+        case 1:
             res = positionStrAcc;
             break;
 

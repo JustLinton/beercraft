@@ -98,7 +98,6 @@ int main()
         renderSkyColor();
         cameraLookAt();
         renderBlocks();
-        // renderTexts();
         rootContext->beerCraftGUI->f3Debug->updateFPSData(&deltaTime, &currentFrame);
         rootContext->beerCraftGUI->render();
         
