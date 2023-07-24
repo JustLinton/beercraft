@@ -1,12 +1,11 @@
-#ifndef ENV_RENDER_H
-#define ENV_RENDER_H
+#ifndef UTIL_H
+#define UTIL_H
 
 #include <iostream>
 #include <map>
 #include <string>
 
-#include <core/root_context.h>
-#include <core/font.h>
+#include <beercraft/root_context.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -20,10 +19,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void renderSkyColor()
+template <class T>
+string float2Str(const T *input, stringstream* sst)
 {
-    glClearColor(SKY_COLOR.x, SKY_COLOR.y, SKY_COLOR.z, SKY_COLOR.w);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    string tmp;
+    sst->clear();
+    (*sst) << *input;
+    (*sst) >> tmp;
+    return tmp;
 }
 
 #endif

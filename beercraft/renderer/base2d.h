@@ -5,7 +5,7 @@
 #include <map>
 #include <string>
 
-#include <core/root_context.h>
+#include <beercraft/root_context.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -52,6 +52,8 @@ using namespace std;
 //     glDeleteBuffers(1, &chVBO);
 // }
 
+
+
 Shader initBase2DRender()
 {
     // configure opengl state for text-render
@@ -71,6 +73,8 @@ Shader initBase2DRender()
 
     return text_shader;
 }
+
+
 
 void renderBase2D(Shader &shader, float x, float y, float scale, glm::vec3 color)
 {

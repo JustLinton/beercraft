@@ -1,17 +1,17 @@
 #define STB_IMAGE_IMPLEMENTATION
 
 #include "properties.h"
-#include <core/font.h>
-#include <core/root_context.h>
-#include <core/shaders.h>
-#include <core/models.h>
-#include <core/camera.h>
-#include <core/control.h>
+#include <beercraft/font.h>
+#include <beercraft/root_context.h>
+#include <beercraft/shaders.h>
+#include <beercraft/models.h>
+#include <beercraft/camera.h>
+#include <beercraft/control.h>
 
 
-#include <core/renderer/text.h>
-#include <core/renderer/env.h>
-#include <core/renderer/base2d.h>
+#include <beercraft/renderer/text.h>
+#include <beercraft/renderer/env.h>
+#include <beercraft/renderer/base2d.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

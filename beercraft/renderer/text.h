@@ -5,9 +5,9 @@
 #include <map>
 #include <string>
 
-#include <core/root_context.h>
-#include <core/font.h>
-#include <core/utils.h>
+#include <beercraft/root_context.h>
+#include <beercraft/font.h>
+#include <beercraft/utils.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -21,7 +21,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#include <core/renderer/base2d.h>
+#include <beercraft/renderer/base2d.h>
 
 void renderTexts(){
     rootContext->shaders["text"]->use();

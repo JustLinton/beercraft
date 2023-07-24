@@ -5,8 +5,8 @@
 #include <map>
 #include <string>
 
-#include <core/root_context.h>
-#include <core/camera.h>
+#include <beercraft/root_context.h>
+#include <beercraft/camera.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>

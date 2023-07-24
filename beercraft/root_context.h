@@ -24,6 +24,8 @@ struct RootContext
     unordered_map<string, Shader *> shaders;
     unordered_map<unsigned int, Model *> blockModels;
     Camera* camera;
+    unordered_map<string, unsigned int *> VAOs;
+    unordered_map<string, unsigned int *> VBOs;
 };
 
 static RootContext *rootContext;

@@ -1,11 +1,11 @@
-#ifndef UTIL_H
-#define UTIL_H
+#ifndef INIT_H
+#define INIT_H
 
 #include <iostream>
 #include <map>
 #include <string>
 
-#include <core/root_context.h>
+#include <beercraft/root_context.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -18,15 +18,5 @@
 
 #include <bits/stdc++.h>
 using namespace std;
-
-template <class T>
-string float2Str(const T *input, stringstream* sst)
-{
-    string tmp;
-    sst->clear();
-    (*sst) << *input;
-    (*sst) >> tmp;
-    return tmp;
-}
 
 #endif
