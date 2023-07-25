@@ -3,7 +3,6 @@
 #include "properties.h"
 #include <beercraft/font.h>
 #include <beercraft/context/root_context.h>
-#include <beercraft/models.h>
 #include <beercraft/player.h>
 #include <beercraft/control.h>
 
@@ -73,7 +72,7 @@ int main()
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
 
-    initRootContext();
+    rootContext = new RootContext;
 
     if (WIREFRAME)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -113,11 +112,4 @@ int main()
     // ------------------------------------------------------------------
     glfwTerminate();
     return 0;
-}
-
-void initRootContext()
-{
-    rootContext = new RootContext;
-    initModels();
-    // initCamera();
 }

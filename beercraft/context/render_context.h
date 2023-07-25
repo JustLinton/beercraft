@@ -25,6 +25,7 @@ public:
 
     RenderContext(){
         initShaders();
+        initModels();
     }
 
 private:
@@ -42,6 +43,17 @@ private:
 
         // static Shader base_2d_shader = initBase2DRender();
         // rootContext->shaders["base_2d_shader"] = &base_2d_shader;
+    }
+
+    void initModels()
+    {
+        // load models
+        // -----------
+        static Model b2("objects/blocks/grass_block/block.obj");
+        blockModels[2] = &b2;
+
+        static Model bw("objects/blocks/white_block/block.obj");
+        blockModels[0] = &bw;
     }
 };
 
