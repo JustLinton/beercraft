@@ -26,8 +26,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void initRootContext();
-
 int main()
 {
     // glfw: initialize and configure
