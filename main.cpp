@@ -1,14 +1,5 @@
 #define STB_IMAGE_IMPLEMENTATION
 
-#include "properties.h"
-#include <beercraft/font.h>
-#include <beercraft/context/root_context.h>
-#include <beercraft/player.h>
-#include <beercraft/control.h>
-
-#include <beercraft/renderer/env.h>
-#include <beercraft/gui/gui.h>
-
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -22,6 +13,15 @@
 
 #include <freetype2/ft2build.h>
 #include FT_FREETYPE_H
+
+#include "properties.h"
+#include <beercraft/font.h>
+#include <beercraft/context/root_context.h>
+#include <beercraft/player.h>
+#include <beercraft/control.h>
+
+#include <beercraft/renderer/env.h>
+#include <beercraft/gui/gui.h>
 
 #include <bits/stdc++.h>
 using namespace std;
