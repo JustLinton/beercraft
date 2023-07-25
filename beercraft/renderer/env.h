@@ -5,7 +5,7 @@
 #include <map>
 #include <string>
 
-#include <beercraft/root_context.h>
+#include <beercraft/context/root_context.h>
 #include <beercraft/font.h>
 
 #include <glad/glad.h>

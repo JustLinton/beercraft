@@ -5,7 +5,8 @@
 #include <map>
 #include <string>
 
-#include <beercraft/root_context.h>
+#include <beercraft/context/render_context.h>
+#include <beercraft/player.h>
 #include <beercraft/font.h>
 #include <beercraft/utils.h>
 
@@ -25,8 +26,8 @@ class F3Debug{
 public:
     unsigned int displayMode = 0;
     bool isOn = false;
-    Shader shader;
-    Camera* camera;
+    Player* player;
+    RenderContext *renderContext;
 
     //number of f3 displaymodes.
     const int modeCount = 4;
@@ -49,10 +50,8 @@ public:
     string testStr = "Test> Loading...";
     //end of test output
 
-    F3Debug(Camera *camera_) : shader("./shaders/base2d2.vs", "./shaders/base2d2.fs"), camera(camera_)
-    {
-        shader = initFontRender();
-    }
+    F3Debug(RenderContext *renderContext_, Player *player_) : renderContext(renderContext_), player(player_)
+    {}
 
     void toggle(){
         if(!shouldProcessToggle)
@@ -75,7 +74,7 @@ public:
         if(!isOn)
             return;
 
-        shader.use();
+        renderContext->shaders["text"]->use();
 
         string res = version_string;
         switch (displayMode)
@@ -101,7 +100,7 @@ public:
             break;
         }
 
-        RenderText(shader, res, 15.0f, (float)SCR_HEIGHT - 30.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
+        RenderText(*(renderContext->shaders["text"]), res, 15.0f, (float)SCR_HEIGHT - 30.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
     }
 
     void updateFPSData(const float *deltaTime, const float *accTime)
@@ -139,11 +138,11 @@ public:
         string res;
         stringstream sst;
         res += "Position> ";
-        res += float2Str<float>(camera->Position.x, &sst);
+        res += float2Str<float>(player->camera->Position.x, &sst);
         res += ", ";
-        res += float2Str<float>(camera->Position.y, &sst);
+        res += float2Str<float>(player->camera->Position.y, &sst);
         res += ", ";
-        res += float2Str<float>(camera->Position.z, &sst);
+        res += float2Str<float>(player->camera->Position.z, &sst);
         positionStrAcc = res;
     }
 
@@ -151,7 +150,7 @@ public:
         string res;
         stringstream sst;
         res += "Test> ";
-        res += float2Str<float>((int)(camera->Position.x), &sst);
+        res += float2Str<float>((int)(player->camera->Position.x), &sst);
 
         testStr = res;
     }

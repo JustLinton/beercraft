@@ -17,26 +17,24 @@
 #include <graphics/camera.h>
 
 #include <beercraft/gui/gui.h>
+#include <beercraft/player.h>
+#include <beercraft/context/render_context.h>
+
 
 #include <bits/stdc++.h>
 using namespace std;
 
-class RootContext
-{
+class RootContext{
 public:
-    unordered_map<string, Shader *> shaders;
-    unordered_map<unsigned int, Model *> blockModels;
-    
-    unordered_map<string, unsigned int *> VAOs;
-    unordered_map<string, unsigned int *> VBOs;
+    RenderContext* renderContext;
 
-    Camera *camera;
-    
+    Player* player;
     BeerCraftGUI* beerCraftGUI;
 
     RootContext(){
-        camera = new Camera(glm::vec3(0.0f, 1.0f, 0.0f));
-        beerCraftGUI = new BeerCraftGUI(camera);
+        renderContext = new RenderContext;
+        player = new Player(renderContext);
+        beerCraftGUI = new BeerCraftGUI(renderContext,player);
     }
 };
 

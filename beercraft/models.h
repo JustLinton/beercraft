@@ -5,7 +5,7 @@
 #include <map>
 #include <string>
 
-#include <beercraft/root_context.h>
+#include <beercraft/context/root_context.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -25,10 +25,10 @@ void initModels()
     // load models
     // -----------
     static Model b2("objects/blocks/grass_block/block.obj");
-    rootContext->blockModels[2] = &b2;
+    rootContext->renderContext->blockModels[2] = &b2;
 
     static Model bw("objects/blocks/white_block/block.obj");
-    rootContext->blockModels[0] = &bw;
+    rootContext->renderContext->blockModels[0] = &bw;
 }
 
 #endif

@@ -5,7 +5,8 @@
 #include <map>
 #include <string>
 
-#include <beercraft/root_context.h>
+#include <beercraft/context/render_context.h>
+#include <beercraft/player.h>
 #include <beercraft/gui/crosshair.h>
 #include <beercraft/gui/f3.h>
 
@@ -26,14 +27,15 @@ public:
     GUICrossHair* crossHair;
     F3Debug* f3Debug;
 
-    Camera* camera;
+    Player* player;
+    RenderContext *renderContext;
 
-    BeerCraftGUI(Camera *camera_) : camera(camera_)
+    BeerCraftGUI(RenderContext *renderContext_, Player *player_) : renderContext(renderContext_), player(player_)
     {
-        crossHair = new GUICrossHair(1.0f, 8.35f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+        crossHair = new GUICrossHair(renderContext, 1.0f, 8.35f, glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
         crossHair->build();
 
-        f3Debug = new F3Debug(camera);
+        f3Debug = new F3Debug(renderContext,player);
     }
 
     void render(){

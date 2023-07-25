@@ -5,8 +5,8 @@
 #include <map>
 #include <string>
 
-#include <beercraft/root_context.h>
-#include <beercraft/camera.h>
+#include <beercraft/context/root_context.h>
+#include <beercraft/player.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -36,8 +36,7 @@ void processInput(GLFWwindow *window)
         glfwSetWindowShouldClose(window, true);
 
     if (glfwGetKey(window, GLFW_KEY_Y) == GLFW_PRESS)
-        moveBackToSpawnPoint();
-
+        rootContext->player->moveBackToSpawnPoint();
 
     //f3 debug
     if (glfwGetKey(window, GLFW_KEY_U) == GLFW_PRESS)
@@ -47,13 +46,13 @@ void processInput(GLFWwindow *window)
     // end of f3 debug
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        rootContext->camera->ProcessKeyboard(FORWARD, deltaTime);
+        rootContext->player->camera->ProcessKeyboard(FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        rootContext->camera->ProcessKeyboard(BACKWARD, deltaTime);
+        rootContext->player->camera->ProcessKeyboard(BACKWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        rootContext->camera->ProcessKeyboard(LEFT, deltaTime);
+        rootContext->player->camera->ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        rootContext->camera->ProcessKeyboard(RIGHT, deltaTime);
+        rootContext->player->camera->ProcessKeyboard(RIGHT, deltaTime);
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
@@ -85,14 +84,14 @@ void mouse_callback(GLFWwindow *window, double xposIn, double yposIn)
     lastX = xpos;
     lastY = ypos;
 
-    rootContext->camera->ProcessMouseMovement(xoffset, yoffset);
+    rootContext->player->camera->ProcessMouseMovement(xoffset, yoffset);
 }
 
 // glfw: whenever the mouse scroll wheel scrolls, this callback is called
 // ----------------------------------------------------------------------
 void scroll_callback(GLFWwindow *window, double xoffset, double yoffset)
 {
-    rootContext->camera->ProcessMouseScroll(static_cast<float>(yoffset));
+    rootContext->player->camera->ProcessMouseScroll(static_cast<float>(yoffset));
 }
 
 #endif

@@ -5,7 +5,7 @@
 #include <map>
 #include <string>
 
-#include <beercraft/root_context.h>
+#include <beercraft/context/render_context.h>
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -21,14 +21,14 @@ using namespace std;
 
 class GUICrossHair{
 public:
-    Shader shader;
+    RenderContext *renderContext;
     unsigned int localVAO, localVBO;
     float thickness;
     float size;
     float xpos = (float)SCR_WIDTH / 2;
     float ypos = (float)SCR_HEIGHT / 2;
     glm::vec4 color;
-    GUICrossHair(float thick, float sz, glm::vec4 theColor) : shader("./shaders/base2d2.vs", "./shaders/base2d2.fs"), thickness(thick), size(sz)
+    GUICrossHair(RenderContext *renderContext_, float thick, float sz, glm::vec4 theColor) : renderContext(renderContext_), thickness(thick), size(sz)
     {
         color = theColor;
 
@@ -39,8 +39,8 @@ public:
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(SCR_WIDTH), 0.0f, static_cast<float>(SCR_HEIGHT));
-        shader.use();
-        glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+        renderContext->shaders["base2d2"]->use();
+        glUniformMatrix4fv(glGetUniformLocation(renderContext->shaders["base2d2"]->ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
         // initFreeType();
 
@@ -64,7 +64,7 @@ public:
     void build()
     {
         // activate corresponding render state
-        shader.use();
+        renderContext->shaders["base2d2"]->use();
         // glUniform3f(glGetUniformLocation(shader.ID, "textColor"), color.x, color.y, color.z);
 
         //bind
@@ -103,10 +103,10 @@ public:
     void render()
     {
         // activate corresponding render state
-        shader.use();
+        renderContext->shaders["base2d2"]->use();
 
         // 给shader传参数：即uniform的那几个，这里是inputColor的那个uniform
-        glUniform4f(glGetUniformLocation(shader.ID, "inputColor"), color.x, color.y, color.z,color.w);
+        glUniform4f(glGetUniformLocation(renderContext->shaders["base2d2"]->ID, "inputColor"), color.x, color.y, color.z, color.w);
 
         glBindVertexArray(localVAO);
         glBindBuffer(GL_ARRAY_BUFFER, localVBO);

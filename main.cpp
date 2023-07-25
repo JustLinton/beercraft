@@ -2,10 +2,9 @@
 
 #include "properties.h"
 #include <beercraft/font.h>
-#include <beercraft/root_context.h>
-#include <beercraft/shaders.h>
+#include <beercraft/context/root_context.h>
 #include <beercraft/models.h>
-#include <beercraft/camera.h>
+#include <beercraft/player.h>
 #include <beercraft/control.h>
 
 #include <beercraft/renderer/env.h>
@@ -96,8 +95,8 @@ int main()
         // render
         // ------
         renderSkyColor();
-        cameraLookAt();
-        renderBlocks();
+        rootContext->player->initCameraVision();
+        rootContext->player->renderBlocks();
         rootContext->beerCraftGUI->f3Debug->updateFPSData(&deltaTime, &currentFrame);
         rootContext->beerCraftGUI->f3Debug->updateTestOutput();
         rootContext->beerCraftGUI->render();
@@ -119,7 +118,6 @@ int main()
 void initRootContext()
 {
     rootContext = new RootContext;
-    initShaders();
     initModels();
     // initCamera();
 }
