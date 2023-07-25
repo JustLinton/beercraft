@@ -19,7 +19,8 @@
 #include <beercraft/gui/gui.h>
 #include <beercraft/player.h>
 #include <beercraft/context/render_context.h>
-
+#include <beercraft/context/game_context.h>
+#include <beercraft/renderer/block_renderer.h>
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -27,14 +28,19 @@ using namespace std;
 class RootContext{
 public:
     RenderContext* renderContext;
+    GameContext* gameContext;
 
     Player* player;
     BeerCraftGUI* beerCraftGUI;
+    BlockRenderer* blockRenderer;
 
     RootContext(){
         renderContext = new RenderContext;
         player = new Player(renderContext);
         beerCraftGUI = new BeerCraftGUI(renderContext,player);
+
+        gameContext = new GameContext(renderContext);
+        blockRenderer = new BlockRenderer(renderContext,gameContext);
     }
 };
 

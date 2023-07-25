@@ -103,6 +103,14 @@ public:
         RenderText(*(renderContext->shaders["text"]), res, 15.0f, (float)SCR_HEIGHT - 30.0f, 0.38f, glm::vec3(1.0f, 1.0f, 1.0f));
     }
 
+    void updateData(const float *deltaTime, const float *accTime)
+    {
+        updateFPSData(deltaTime, accTime);
+        updateF3DataCamPosition();
+        updateTestOutput();
+    }
+
+private:
     void updateFPSData(const float *deltaTime, const float *accTime)
     {
         // this function should be called by main.cpp on every frame to ensure its properly work. (even if f3 is not on.)
@@ -125,8 +133,6 @@ public:
             lastFpsDataCountOneSec = 0;
             lastFpsStr = "FPS> " + lastFpsStr;            
         }
-
-        updateF3DataCamPosition();
     }
 
     void updateF3DataCamPosition()

@@ -37,37 +37,6 @@ public:
         camera->Position = glm::vec3(0.0f, 1.0f, 0.0f);
     }
 
-    void renderBlocks()
-    {
-
-        renderContext->shaders["default_model"]->use();
-        glm::vec3 blockScale(0.5f, 0.5f, 0.5f);
-        // default:
-        //  glm::vec3 blockScale(0.2f, 0.2f, 0.2f);
-
-        // render the loaded model
-        glm::mat4 unitMat = glm::mat4(1.0f);
-
-        for (int i = 0; i <= 1; i++)
-        {
-            glm::mat4 model = unitMat;
-            if (i == 0)
-            {
-                model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-                model = glm::scale(model, blockScale);                      // it's a bit too big for our scene, so scale it down
-                renderContext->shaders["default_model"]->setMat4("model", model);
-                renderContext->blockModels[2]->Draw(*renderContext->shaders["default_model"]);
-            }
-            if (i == 1)
-            {
-                model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-                model = glm::scale(model, blockScale);                      // it's a bit too big for our scene, so scale it down
-                renderContext->shaders["default_model"]->setMat4("model", model);
-                renderContext->blockModels[0]->Draw(*renderContext->shaders["default_model"]);
-            }
-        }
-    }
-
     void initCameraVision()
     {
         // don't forget to enable shader before setting uniforms

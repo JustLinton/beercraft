@@ -92,13 +92,12 @@ int main()
         // render
         // ------
         renderSkyColor();
+
         rootContext->player->initCameraVision();
-        rootContext->player->renderBlocks();
-        rootContext->beerCraftGUI->f3Debug->updateFPSData(&deltaTime, &currentFrame);
-        rootContext->beerCraftGUI->f3Debug->updateTestOutput();
+        rootContext->blockRenderer->render();
+
+        rootContext->beerCraftGUI->f3Debug->updateData(&deltaTime, &currentFrame);
         rootContext->beerCraftGUI->render();
-        
-        // renderTextTest();
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------

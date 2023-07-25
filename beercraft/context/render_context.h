@@ -13,6 +13,7 @@
 #include <glm/gtc/type_ptr.hpp>
 
 #include <graphics/shader.h>
+#include <graphics/model.h>
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -21,11 +22,9 @@ class RenderContext
 {
 public:
     unordered_map<string, Shader *> shaders;
-    unordered_map<unsigned int, Model *> blockModels;
 
     RenderContext(){
         initShaders();
-        initModels();
     }
 
 private:
@@ -45,16 +44,6 @@ private:
         // rootContext->shaders["base_2d_shader"] = &base_2d_shader;
     }
 
-    void initModels()
-    {
-        // load models
-        // -----------
-        static Model b2("objects/blocks/grass_block/block.obj");
-        blockModels[2] = &b2;
-
-        static Model bw("objects/blocks/white_block/block.obj");
-        blockModels[0] = &bw;
-    }
 };
 
 #endif

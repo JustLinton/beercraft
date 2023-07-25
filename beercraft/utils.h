@@ -29,4 +29,14 @@ string float2Str(const T input, stringstream* sst)
     return tmp;
 }
 
+template <class T>
+T str2T(const string input, stringstream *sst)
+{
+    T tmp;
+    sst->clear();
+    (*sst) << input;
+    (*sst) >> tmp;
+    return tmp;
+}
+
 #endif
