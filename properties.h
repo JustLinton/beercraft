@@ -16,8 +16,10 @@
 using namespace std;
 
 // ----------------------- screen size ----------------------------------------------
-const unsigned int SCR_WIDTH = 1280;
-const unsigned int SCR_HEIGHT = 720;
+// const unsigned int SCR_WIDTH = 1280;
+// const unsigned int SCR_HEIGHT = 720;
+const unsigned int SCR_WIDTH = 1024;
+const unsigned int SCR_HEIGHT = 576;
 // ==================================================================================
 
 // ----------------------- draw in wireframe ----------------------------------------

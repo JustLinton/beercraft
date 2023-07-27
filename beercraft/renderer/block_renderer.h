@@ -46,13 +46,13 @@ class BlockRenderer{
                 renderContext->shaders["default_model"]->setMat4("model", model);
                 gameContext->getBlockByID(2)->getModel()->Draw(*renderContext->shaders["default_model"]);
             }
-            if (i == 1)
-            {
-                model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-                model = glm::scale(model, blockScale);                      // it's a bit too big for our scene, so scale it down
-                renderContext->shaders["default_model"]->setMat4("model", model);
-                gameContext->getBlockByID(1111)->getModel()->Draw(*renderContext->shaders["default_model"]);
-            }
+            // if (i == 1)
+            // {
+            //     model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+            //     model = glm::scale(model, blockScale);                      // it's a bit too big for our scene, so scale it down
+            //     renderContext->shaders["default_model"]->setMat4("model", model);
+            //     gameContext->getBlockByID(1111)->getModel()->Draw(*renderContext->shaders["default_model"]);
+            // }
         }
     }
     // void renderBlocks_AxisTest()
