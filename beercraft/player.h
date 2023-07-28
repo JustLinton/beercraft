@@ -20,6 +20,16 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+enum PlayerMovement
+{
+    PLAYER_SPECT_FORWARD,
+    PLAYER_SPECT_BACK,
+    PLAYER_SPECT_LEFT,
+    PLAYER_SPECT_RIGHT,
+    PLAYER_FLY_UP,
+    PLAYER_FLY_DOWN,
+};
+
 class Player{
 public:
     Camera* camera;
@@ -49,9 +59,45 @@ public:
         renderContext->shaders["default_model"]->setMat4("view", view);
     }
 
+    void ProcessControl(PlayerMovement movement, float deltaTime);
+
+    private:
+        float speed = 3.5f;
 };
 
+void Player::ProcessControl(PlayerMovement movement, float deltaTime)
+{
+        float velocity = speed * deltaTime;
 
+        switch (movement)
+        {
+        case PLAYER_SPECT_FORWARD:
+            camera->Position += camera->Front * velocity;
+            break;
 
+        case PLAYER_SPECT_BACK:
+            camera->Position -= camera->Front * velocity;
+            break;
+
+        case PLAYER_SPECT_LEFT:
+            camera->Position -= camera->Right * velocity;
+            break;
+
+        case PLAYER_SPECT_RIGHT:
+            camera->Position += camera->Right * velocity;
+            break;
+
+        case PLAYER_FLY_UP:
+            camera->Position += glm::vec3(0.0f, 1.0f, 0.0f) * velocity;
+            break;
+
+        case PLAYER_FLY_DOWN:
+            camera->Position -= glm::vec3(0.0f, 1.0f, 0.0f) * velocity;
+            break;
+
+        default : 
+            break;
+        }
+}
 
 #endif

@@ -46,14 +46,19 @@ void processInput(GLFWwindow *window)
         rootContext->beerCraftGUI->f3Debug->modeSwitch();
     // end of f3 debug
 
+    if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+        rootContext->player->ProcessControl(PLAYER_FLY_UP, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+        rootContext->player->ProcessControl(PLAYER_FLY_DOWN, deltaTime);
+
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        rootContext->player->camera->ProcessKeyboard(FORWARD, deltaTime);
+        rootContext->player->ProcessControl(PLAYER_SPECT_FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        rootContext->player->camera->ProcessKeyboard(BACKWARD, deltaTime);
+        rootContext->player->ProcessControl(PLAYER_SPECT_BACK, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        rootContext->player->camera->ProcessKeyboard(LEFT, deltaTime);
+        rootContext->player->ProcessControl(PLAYER_SPECT_LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        rootContext->player->camera->ProcessKeyboard(RIGHT, deltaTime);
+        rootContext->player->ProcessControl(PLAYER_SPECT_RIGHT, deltaTime);
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
