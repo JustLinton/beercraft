@@ -64,7 +64,7 @@ public:
     void ProcessControl(PlayerMovement movement, float deltaTime);
 
     private:
-        float speed = 5.5f; //default:2.5f
+        float speed = 5.5f; //default:2.5f mc:5.5f.
 };
 
 void Player::ProcessControl(PlayerMovement movement, float deltaTime)
