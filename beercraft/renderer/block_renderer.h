@@ -45,15 +45,9 @@ class BlockRenderer{
                 // model = glm::scale(model, blockScale);                      // it's a bit too big for our scene, so scale it down
                 // model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0, 0.0, 1.0));
                 renderContext->shaders["default_model"]->setMat4("model", model);
-                gameContext->getBlockByID(61)->getModel()->Draw(*renderContext->shaders["default_model"]);
+                gameContext->getBlockByID(2)->getModel()->Draw(*renderContext->shaders["default_model"]);
             }
-            // if (i == 1)
-            // {
-            //     model = glm::translate(model, glm::vec3(0.5f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-            //     model = glm::scale(model, blockScale);                      // it's a bit too big for our scene, so scale it down
-            //     renderContext->shaders["default_model"]->setMat4("model", model);
-            //     gameContext->getBlockByID(1111)->getModel()->Draw(*renderContext->shaders["default_model"]);
-            // }
+            
 
             // Model ourModel("objects/door/Wooden-Door.obj");
             // ourModel.Draw(*renderContext->shaders["default_model"]);
