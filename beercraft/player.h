@@ -28,6 +28,8 @@ enum PlayerMovement
     PLAYER_SPECT_RIGHT,
     PLAYER_FLY_UP,
     PLAYER_FLY_DOWN,
+    PLAYER_FLY_FORWARD,
+    PLAYER_FLY_BACK
 };
 
 class Player{
@@ -62,7 +64,7 @@ public:
     void ProcessControl(PlayerMovement movement, float deltaTime);
 
     private:
-        float speed = 3.5f;
+        float speed = 5.5f; //default:2.5f
 };
 
 void Player::ProcessControl(PlayerMovement movement, float deltaTime)
@@ -93,6 +95,14 @@ void Player::ProcessControl(PlayerMovement movement, float deltaTime)
 
         case PLAYER_FLY_DOWN:
             camera->Position -= glm::vec3(0.0f, 1.0f, 0.0f) * velocity;
+            break;
+
+        case PLAYER_FLY_FORWARD:
+            camera->Position += glm::vec3(1.0f, 0.0f, 1.0f) * camera->Front * velocity;
+            break;
+
+        case PLAYER_FLY_BACK:
+            camera->Position -= glm::vec3(1.0f, 0.0f, 1.0f) * camera->Front * velocity;
             break;
 
         default : 

@@ -52,9 +52,14 @@ void processInput(GLFWwindow *window)
         rootContext->player->ProcessControl(PLAYER_FLY_DOWN, deltaTime);
 
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        rootContext->player->ProcessControl(PLAYER_SPECT_FORWARD, deltaTime);
+        rootContext->player->ProcessControl(PLAYER_FLY_FORWARD, deltaTime);
+        // rootContext->player->ProcessControl(PLAYER_SPECT_FORWARD, deltaTime);
+
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        rootContext->player->ProcessControl(PLAYER_SPECT_BACK, deltaTime);
+        rootContext->player->ProcessControl(PLAYER_FLY_BACK, deltaTime);
+        // rootContext->player->ProcessControl(PLAYER_SPECT_BACK, deltaTime);
+
+
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
         rootContext->player->ProcessControl(PLAYER_SPECT_LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
