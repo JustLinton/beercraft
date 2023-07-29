@@ -54,6 +54,9 @@ class BlockRenderer{
             //     renderContext->shaders["default_model"]->setMat4("model", model);
             //     gameContext->getBlockByID(1111)->getModel()->Draw(*renderContext->shaders["default_model"]);
             // }
+
+            Model ourModel("objects/door/Wooden-Door.obj");
+            ourModel.Draw(ourShader);
         }
     }
     // void renderBlocks_AxisTest()
