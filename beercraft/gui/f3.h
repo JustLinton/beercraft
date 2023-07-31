@@ -30,7 +30,7 @@ public:
     RenderContext *renderContext;
 
     //number of f3 displaymodes.
-    const int modeCount = 4;
+    const int modeCount = 2;
 
     //this bool ensures f3key works properly. (add colddown using fpsdata update.)
     bool shouldProcessToggle = true;
@@ -79,21 +79,21 @@ public:
         string res = version_string;
         switch (displayMode)
         {
-        case 0:
-            res = version_string;
-            break;
+        // case 2:
+        //     res = version_string;
+        //     break;
 
-        case 2:
+        case 1:
             res = lastFpsStr;
             break;
 
-        case 1:
+        case 0:
             res = positionStrAcc;
             break;
 
-        case 3:
-            res = testStr;
-            break;
+        // case 3:
+        //     res = testStr;
+        //     break;
 
         default:
             res = version_string;
@@ -126,9 +126,7 @@ private:
         if (*accTime - lastTime >= 1.0f)
         {
             lastTime = *accTime;
-            stringstream sst;
-            sst << lastFpsOneSec / lastFpsDataCountOneSec;
-            sst >> lastFpsStr;
+            lastFpsStr = to_string((int)round(lastFpsOneSec / lastFpsDataCountOneSec));
             lastFpsOneSec = 0.0f;
             lastFpsDataCountOneSec = 0;
             lastFpsStr = "FPS> " + lastFpsStr;            
@@ -142,21 +140,26 @@ private:
             return;
 
         string res;
-        stringstream sst;
         res += "Position> ";
-        res += float2Str<float>(player->camera->Position.x, &sst);
+        res += to_string((int)round(player->camera->Position.x));
         res += ", ";
-        res += float2Str<float>(player->camera->Position.y, &sst);
+        res += to_string((int)round(player->camera->Position.y));
         res += ", ";
-        res += float2Str<float>(player->camera->Position.z, &sst);
+        res += to_string((int)round(player->camera->Position.z));
+        res += " (";
+        res += to_string(player->camera->Position.x).substr(0, (player->camera->Position.x >= 0 ? 5 : 6));
+        res += ", ";
+        res += to_string(player->camera->Position.y).substr(0, (player->camera->Position.y >= 0 ? 5 : 6));
+        res += ", ";
+        res += to_string(player->camera->Position.z).substr(0, (player->camera->Position.z >= 0 ? 5 : 6));
+        res += ")";
         positionStrAcc = res;
     }
 
     void updateTestOutput(){
         string res;
-        stringstream sst;
         res += "Test> ";
-        res += float2Str<float>((int)(player->camera->Position.x), &sst);
+        res += to_string((int)(player->camera->Position.x));
 
         testStr = res;
     }

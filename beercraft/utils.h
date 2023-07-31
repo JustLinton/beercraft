@@ -19,15 +19,15 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template <class T>
-string float2Str(const T input, stringstream* sst)
-{
-    string tmp;
-    sst->clear();
-    (*sst) << input;
-    (*sst) >> tmp;
-    return tmp;
-}
+// template <class T>
+// string float2Str(const T input, stringstream* sst)
+// {
+//     string tmp;
+//     sst->clear();
+//     (*sst) << input;
+//     (*sst) >> tmp;
+//     return tmp;
+// }
 
 template <class T>
 T str2T(const string input, stringstream *sst)
