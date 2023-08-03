@@ -90,10 +90,10 @@ public:
 
 private:
     // walkMaxSpeed: 行走最大速度。为防止斜着走比直着走快，不允许movementspeed超过该速度。如果阻力过大但是行走加速度过小，则导致无法达到该最大速度。
-    float walkMaxSpeed = 0.15f; // default:2.5f mc:5.5f.
+    float walkMaxSpeed = 0.13f; // default:2.5f mc:5.5f.
 
     // walkAccelerate: 行走加速度。越高则越灵敏，越低则越能感觉出惯性。其数值需与阻力数值匹配。
-    float walkAccelerate = 0.33f;
+    float walkAccelerate = 0.38f;
     glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
     Velocity velocity;
     void move(PlayerMovementType speedType, glm::vec3 vv);
@@ -159,7 +159,7 @@ void Player::move(PlayerMovementType movementType, glm::vec3 vv)
         case PLAYER_FLY_UP:
         case PLAYER_FLY_DOWN:
             {
-                giveSpeedWithLimit(&velocity.creativeUPDN,walkMaxSpeed,vv);
+                giveSpeedWithLimit(&velocity.movement,walkMaxSpeed,vv);
                 break;
             }
 
@@ -183,12 +183,12 @@ void Player::giveSpeedWithLimit(glm::vec3 *vel, float limit, glm::vec3 vv)
     *vel = res;
 }
 
-//阻力。为分段函数。当0.05以上时，采用简化版的物理公式，否则采用一次函数。
-float airResistanceCoefficient = 0.44f;
+//阻力。为分段函数。当0.05以上时，采用简化版的物理公式，否则采用一次函数。一次函数的参数越小，停下的过程越慢，但是越丝滑。
+float airResistanceCoefficient = 0.38f;
 float calResistanceAcc(float speed){
-    if(speed >= 0.05)
+    if(speed >= 0.03)
         return 0.5 * airResistanceCoefficient * speed;
-    return 0.05;
+    return 0.02;
 }
 
 glm::vec3 resist(ResistanceType resistanceType, glm::vec3 v)

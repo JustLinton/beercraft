@@ -140,21 +140,21 @@ private:
             return;
 
         string res;
-        res += "SP> ";
+        res += "Speed> ";
         res += to_string(player->getSpeed()).substr(0, 4);
-        res += ", ";
-        res += to_string((int)round(player->camera->Position.x));
-        res += ", ";
-        res += to_string((int)round(player->camera->Position.y));
-        res += ", ";
-        res += to_string((int)round(player->camera->Position.z));
-        res += " (";
-        res += to_string(player->camera->Position.x).substr(0, (player->camera->Position.x >= 0 ? 5 : 6));
-        res += ", ";
-        res += to_string(player->camera->Position.y).substr(0, (player->camera->Position.y >= 0 ? 5 : 6));
-        res += ", ";
-        res += to_string(player->camera->Position.z).substr(0, (player->camera->Position.z >= 0 ? 5 : 6));
-        res += ")";
+        // res += ", ";
+        // res += to_string((int)round(player->camera->Position.x));
+        // res += ", ";
+        // res += to_string((int)round(player->camera->Position.y));
+        // res += ", ";
+        // res += to_string((int)round(player->camera->Position.z));
+        // res += " (";
+        // res += to_string(player->camera->Position.x).substr(0, (player->camera->Position.x >= 0 ? 5 : 6));
+        // res += ", ";
+        // res += to_string(player->camera->Position.y).substr(0, (player->camera->Position.y >= 0 ? 5 : 6));
+        // res += ", ";
+        // res += to_string(player->camera->Position.z).substr(0, (player->camera->Position.z >= 0 ? 5 : 6));
+        // res += ")";
         positionStrAcc = res;
     }
 
