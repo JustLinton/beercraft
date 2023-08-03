@@ -20,20 +20,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-enum PlayerMovement
+enum PlayerMovementType
 {
     PLAYER_SPECT_FORWARD,
     PLAYER_SPECT_BACK,
-    PLAYER_SPECT_LEFT,
-    PLAYER_SPECT_RIGHT,
+    PLAYER_FLY_LEFT,
+    PLAYER_FLY_RIGHT,
     PLAYER_FLY_UP,
     PLAYER_FLY_DOWN,
     PLAYER_FLY_FORWARD,
     PLAYER_FLY_BACK
 };
 
-enum PlayerSpeed{
-    PLAYER_SPEED_FLY
+enum ResistanceType
+{
+    RESISTANCE_AIR,
+    RESISTANCE_CREATIVE_UPDN,
 };
 
 class Velocity{
@@ -43,6 +45,7 @@ public:
     glm::vec3 whole = glm::vec3(0.0f, 0.0f, 0.0f);
     glm::vec3 physics = glm::vec3(0.0f, 0.0f, 0.0f);
     glm::vec3 movement = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 creativeUPDN = glm::vec3(0.0f, 0.0f, 0.0f);
 };
 
 class Player{
@@ -82,7 +85,7 @@ public:
         renderContext->shaders["default_model"]->setMat4("view", view);
     }
 
-    void ProcessControl(PlayerMovement movement, float deltaTime);
+    void ProcessControl(PlayerMovementType movement, float deltaTime);
     void updatePosition();
 
 private:
@@ -93,45 +96,46 @@ private:
     float walkAccelerate = 0.33f;
     glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
     Velocity velocity;
-    void move(PlayerSpeed speedType, glm::vec3 vv);
+    void move(PlayerMovementType speedType, glm::vec3 vv);
+    void giveSpeedWithLimit(glm::vec3 *vel, float limit, glm::vec3 vv);
 };
 
-void Player::ProcessControl(PlayerMovement movement, float deltaTime)
+void Player::ProcessControl(PlayerMovementType movement, float deltaTime)
 {
         float frameAcc = walkAccelerate * deltaTime;
 
         switch (movement)
         {
         case PLAYER_SPECT_FORWARD:
-            move(PLAYER_SPEED_FLY, camera->Front * frameAcc);
+            move(movement, camera->Front * frameAcc);
         break;
 
         case PLAYER_SPECT_BACK:
-            move(PLAYER_SPEED_FLY, -camera->Front * frameAcc);
+            move(movement, -camera->Front * frameAcc);
             break;
 
-        case PLAYER_SPECT_LEFT:
-            move(PLAYER_SPEED_FLY, -camera->Right * frameAcc);
+        case PLAYER_FLY_LEFT:
+            move(movement, -camera->Right * frameAcc);
             break;
 
-        case PLAYER_SPECT_RIGHT:
-            move(PLAYER_SPEED_FLY, camera->Right * frameAcc);
+        case PLAYER_FLY_RIGHT:
+            move(movement, camera->Right * frameAcc);
             break;
 
         case PLAYER_FLY_UP:
-            move(PLAYER_SPEED_FLY, glm::vec3(0.0f, 1.0f, 0.0f) * frameAcc);
+            move(movement, glm::vec3(0.0f, 1.0f, 0.0f) * frameAcc);
             break;
 
         case PLAYER_FLY_DOWN:
-            move(PLAYER_SPEED_FLY, -glm::vec3(0.0f, 1.0f, 0.0f) * frameAcc);
+            move(movement, -glm::vec3(0.0f, 1.0f, 0.0f) * frameAcc);
             break;
 
         case PLAYER_FLY_FORWARD:
-            move(PLAYER_SPEED_FLY, glm::vec3(-1.0f, 0.0f, -1.0f) * glm::normalize(glm::cross(camera->Right, camera->WorldUp)) * frameAcc);
+            move(movement, glm::vec3(-1.0f, 0.0f, -1.0f) * glm::normalize(glm::cross(camera->Right, camera->WorldUp)) * frameAcc);
             break;
 
         case PLAYER_FLY_BACK:
-            move(PLAYER_SPEED_FLY, -glm::vec3(-1.0f, 0.0f, -1.0f) * glm::normalize(glm::cross(camera->Right, camera->WorldUp)) * frameAcc);
+            move(movement, -glm::vec3(-1.0f, 0.0f, -1.0f) * glm::normalize(glm::cross(camera->Right, camera->WorldUp)) * frameAcc);
             break;
 
         default : 
@@ -139,25 +143,45 @@ void Player::ProcessControl(PlayerMovement movement, float deltaTime)
         }
 }
 
-void Player::move(PlayerSpeed speedType, glm::vec3 vv)
+void Player::move(PlayerMovementType movementType, glm::vec3 vv)
 {
-    
-    if(speedType == PLAYER_SPEED_FLY){
-        glm::vec3 res = velocity.movement;
+    switch (movementType)
+    {
+        case PLAYER_FLY_BACK:
+        case PLAYER_FLY_FORWARD:
+        case PLAYER_FLY_LEFT:
+        case PLAYER_FLY_RIGHT:
+            {
+                giveSpeedWithLimit(&velocity.movement, walkMaxSpeed, vv);
+                break;
+            }
 
-        res += vv;
+        case PLAYER_FLY_UP:
+        case PLAYER_FLY_DOWN:
+            {
+                giveSpeedWithLimit(&velocity.creativeUPDN,walkMaxSpeed,vv);
+                break;
+            }
 
-        float newSpeed = glm::length(res);
-        if(newSpeed >= walkMaxSpeed){
-            float oldNewRatio = (float)walkMaxSpeed / newSpeed;
-            res *= glm::vec3(oldNewRatio, oldNewRatio, oldNewRatio);
-        }
-
-        velocity.movement = res;
+        default:
+            break;
     }
-  
 }
 
+void Player::giveSpeedWithLimit(glm::vec3 *vel, float limit, glm::vec3 vv)
+{
+    glm::vec3 res = *vel;
+    res += vv;
+
+    float newSpeed = glm::length(res);
+    if (newSpeed >= limit)
+    {
+            float oldNewRatio = (float)limit / newSpeed;
+            res *= glm::vec3(oldNewRatio, oldNewRatio, oldNewRatio);
+    }
+
+    *vel = res;
+}
 
 //阻力。为分段函数。当0.05以上时，采用简化版的物理公式，否则采用一次函数。
 float airResistanceCoefficient = 0.44f;
@@ -167,16 +191,29 @@ float calResistanceAcc(float speed){
     return 0.05;
 }
 
-glm::vec3 resist(glm::vec3 v)
+glm::vec3 resist(ResistanceType resistanceType, glm::vec3 v)
 {
-    glm::vec3 res = v - v * calResistanceAcc(glm::length(v));
-    if (res.x * v.x < 0)
-        res.x = 0;
-    if (res.y * v.y < 0)
-        res.y = 0;
-    if (res.z * v.z < 0)
-        res.z = 0;
-    return res;
+    switch (resistanceType)
+    {
+        case RESISTANCE_AIR:
+        {
+            glm::vec3 res = v - v * calResistanceAcc(glm::length(v));
+            if (res.x * v.x < 0)
+                res.x = 0;
+            if (res.y * v.y < 0)
+                res.y = 0;
+            if (res.z * v.z < 0)
+                res.z = 0;
+            return res;
+        }
+
+        case RESISTANCE_CREATIVE_UPDN:
+            break;
+
+        default:
+            break;
+    }
+    
 }
 
 void Velocity::update()
@@ -188,8 +225,8 @@ void Velocity::update()
     whole = res;
     speed = glm::length(whole);
 
-    movement = resist(movement);
-    whole = resist(whole);
+    movement = resist(RESISTANCE_AIR, movement);
+    whole = resist(RESISTANCE_AIR, whole);
 }
 
 void Player::updatePosition()

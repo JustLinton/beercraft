@@ -61,9 +61,9 @@ void processInput(GLFWwindow *window)
 
 
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        rootContext->player->ProcessControl(PLAYER_SPECT_LEFT, deltaTime);
+        rootContext->player->ProcessControl(PLAYER_FLY_LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-        rootContext->player->ProcessControl(PLAYER_SPECT_RIGHT, deltaTime);
+        rootContext->player->ProcessControl(PLAYER_FLY_RIGHT, deltaTime);
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
