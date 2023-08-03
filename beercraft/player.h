@@ -141,9 +141,10 @@ void Player::ProcessControl(PlayerMovement movement, float deltaTime)
 
 void Player::move(PlayerSpeed speedType, glm::vec3 vv)
 {
-    glm::vec3 res = velocity.movement;
-
+    
     if(speedType == PLAYER_SPEED_FLY){
+        glm::vec3 res = velocity.movement;
+
         res += vv;
 
         float newSpeed = glm::length(res);
@@ -151,9 +152,10 @@ void Player::move(PlayerSpeed speedType, glm::vec3 vv)
             float oldNewRatio = (float)walkMaxSpeed / newSpeed;
             res *= glm::vec3(oldNewRatio, oldNewRatio, oldNewRatio);
         }
-    }
 
-    velocity.movement = res;
+        velocity.movement = res;
+    }
+  
 }
 
 
