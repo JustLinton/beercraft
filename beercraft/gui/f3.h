@@ -140,7 +140,9 @@ private:
             return;
 
         string res;
-        res += "Position> ";
+        res += "SP> ";
+        res += to_string(player->getSpeed()).substr(0, 4);
+        res += ", ";
         res += to_string((int)round(player->camera->Position.x));
         res += ", ";
         res += to_string((int)round(player->camera->Position.y));

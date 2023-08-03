@@ -88,7 +88,10 @@
         "random": "cpp",
         "algorithm": "cpp",
         "filesystem": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "iterator": "cpp",
+        "memory_resource": "cpp",
+        "utility": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

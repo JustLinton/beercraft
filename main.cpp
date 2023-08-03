@@ -94,6 +94,9 @@ int main()
         renderSkyColor();
 
         rootContext->player->initCameraVision();
+        rootContext->player->getVelocity()->update();
+        rootContext->player->updatePosition();
+
         rootContext->blockRenderer->render();
 
         rootContext->beerCraftGUI->f3Debug->updateData(&deltaTime, &currentFrame);
